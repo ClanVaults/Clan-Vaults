@@ -1,0 +1,36 @@
+{
+  "name": "clan-vaults",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint --fix && prettier --write --ignore-path .prettierignore ."
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.45.1",
+    "next": "14.2.5",
+    "prettier": "^3.3.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "viem": "^2.18.7",
+    "wagmi": "^2.12.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@wagmi/cli": "latest",
+    "bufferutil": "^4.0.8",
+    "encoding": "^0.1.13",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "lokijs": "^1.5.12",
+    "pino-pretty": "^10.3.1",
+    "supports-color": "^9.4.0",
+    "typescript": "^5",
+    "utf-8-validate": "^5.0.2"
+  }
+}

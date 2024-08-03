@@ -1,0 +1,20 @@
+.homepage__principalContainer {
+  display: flex;
+}
+
+.homepage__loginWithMetamaskContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+  background-color: grey;
+  width: 500px;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border-radius: 20px;
+}
+
+.homepage__generalText {
+  font-size: 16px;
+  font-weight: 400;
+}

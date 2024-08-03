@@ -30,15 +30,34 @@ function Home() {
 
       <div>
         <h2>Connect</h2>
-        {connectors
-          .filter(
-            (connector) =>
-              connector.name === "MetaMask" || connector.name === "Injected",
-          )
-          .map((connector) => {
+        <div className="homepage__loginMethodsContainer">
+          {connectors
+            .filter(
+              (connector) =>
+                connector.name === "Injected" ||
+                connector.name === "WalletConnect",
+            )
+            .map((connector) => {
+              return (
+                <button
+                  className="homepage__defaultButtonToLogin cursor-pointer"
+                  key={connector.uid}
+                  onClick={() => connect({ connector })}
+                  type="button"
+                >
+                  {connector.name}
+                </button>
+              );
+            })}
+        </div>
+        <div>
+          {connectors.map((connector) => {
             if (connector.name === "MetaMask") {
               return (
-                <div className="homepage__loginWithMetamaskContainer">
+                <div
+                  className="homepage__loginWithMetamaskContainer"
+                  key={connector.uid}
+                >
                   <span className="homepage__generalText">
                     Connect with wallet
                   </span>
@@ -53,16 +72,8 @@ function Home() {
                 </div>
               );
             }
-            return (
-              <button
-                key={connector.uid}
-                onClick={() => connect({ connector })}
-                type="button"
-              >
-                {connector.name}
-              </button>
-            );
           })}
+        </div>
         <div>{status}</div>
         <div>{error?.message}</div>
       </div>

@@ -18,3 +18,13 @@
   font-size: 16px;
   font-weight: 400;
 }
+
+.homepage__loginMethodsContainer {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.homepage__defaultButtonToLogin {
+  height: fit-content;
+}

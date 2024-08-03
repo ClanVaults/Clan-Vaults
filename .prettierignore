@@ -2,4 +2,6 @@
 /dist
 /.next
 /build
-pnpm-lock.yaml
+/package-lock.json
+/LICENSE
+/README.md

@@ -4,14 +4,16 @@ import Image from "next/image";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import React from "react";
 import VerticalLine from "./VerticalLine";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import HorizontalLine from "./HorizontalLine";
+import SidebarCircle from "./SidebarCircle";
 
 const Home: React.FC = () => {
   const account = useAccount();
   const { connectors, connect /* status, error */ } = useConnect();
   const { disconnect } = useDisconnect();
   const router = useRouter();
-
+  const pathname = usePathname();
   /* const openGithubTeam = () => {
     window.open("https://github.com/ClanVaults", "_blank");
   }; */
@@ -107,7 +109,7 @@ const Home: React.FC = () => {
 
       <div className="main-layout">
         <aside className="sidebar">
-          <div className="user-profile">
+          <div className="homepage__user-profile">
             {account.status === "connected" && (
               <>
                 <Image
@@ -117,15 +119,18 @@ const Home: React.FC = () => {
                   width={50}
                   height={50}
                 />
-                <p className="user-name">
-                  {formatAddress(account.addresses[0])}
-                </p>
+                <div className="homepage__userNameAndBalanceContainer">
+                  <span className="homepage__user-name">
+                    {formatAddress(account.addresses[0])}
+                  </span>
+                  <span className="homepage__user-balance">$94.000</span>
+                </div>
               </>
             )}
           </div>
           {account.status === "connected" && (
-            <div className="wallet-actions">
-              <button className="wallet-action-btn">Fast Deposit</button>
+            <div className="homepage__wallet-actions">
+              <button className="fast-deposit-btn">Fast Deposit</button>
               <div className="buttons-container">
                 <button className="wallet-action-btn">Send</button>
                 <button className="wallet-action-btn">Withdraw</button>
@@ -133,37 +138,95 @@ const Home: React.FC = () => {
               </div>
             </div>
           )}
+          <div className="homepage__horizontalLineContainer">
+            <HorizontalLine />
+          </div>
           <nav className="nav">
             <ul>
               <li>
-                <a href="#" className="nav-link">
-                  Dashboard
+                <a
+                  href="#"
+                  className={
+                    pathname === "/home" ? "active-nav-link" : "nav-link"
+                  }
+                >
+                  <SidebarCircle />
+                  Home
                 </a>
               </li>
+              <HorizontalLine />
               <li>
-                <a href="#" className="nav-link">
-                  Profile
+                <a
+                  href="#"
+                  className={
+                    pathname === "/my-assets" ? "active-nav-link" : "nav-link"
+                  }
+                >
+                  <SidebarCircle />
+                  My assets
                 </a>
               </li>
+              <HorizontalLine />
               <li>
-                <a href="#" className="nav-link">
-                  Settings
+                <a
+                  href="#"
+                  className={
+                    pathname === "/my-vaults" ? "active-nav-link" : "nav-link"
+                  }
+                >
+                  <SidebarCircle />
+                  My vaults
                 </a>
               </li>
+              <HorizontalLine />
               <li>
-                <a href="#" className="nav-link">
+                <a
+                  href="#"
+                  className={
+                    pathname === "/notifications"
+                      ? "active-nav-link"
+                      : "nav-link"
+                  }
+                >
+                  <SidebarCircle />
                   Notifications
                 </a>
               </li>
+              <HorizontalLine />
               <li>
-                <a href="#" className="nav-link">
-                  Help
+                <a
+                  href="#"
+                  className={
+                    pathname === "/transactions"
+                      ? "active-nav-link"
+                      : "nav-link"
+                  }
+                >
+                  <SidebarCircle />
+                  Transactions
                 </a>
               </li>
+              <HorizontalLine />
               <li>
-                <a href="#" className="nav-link">
-                  Logout
+                <a
+                  href="#"
+                  className={
+                    pathname === "/settings" ? "active-nav-link" : "nav-link"
+                  }
+                >
+                  <SidebarCircle />
+                  Settings
                 </a>
+              </li>
+              <HorizontalLine />
+              <li>
+                <div
+                  className="nav-link cursor-pointer"
+                  onClick={() => disconnect()}
+                >
+                  <SidebarCircle />
+                  Logout
+                </div>
               </li>
             </ul>
           </nav>

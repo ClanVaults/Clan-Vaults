@@ -88,19 +88,21 @@ body {
 
 /* Sidebar */
 .sidebar {
-  width: 250px;
-  background-color: #f3f4f6;
-  padding: 1rem;
-  border-right: 1px solid #ddd;
+  width: 218px;
+  background-color: #181818;
+  padding-bottom: 40px;
+  border-right: 1px solid rgb(229, 227, 227);
   display: flex;
   flex-direction: column;
 }
 
-.user-profile {
+.homepage__user-profile {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin-bottom: 2rem;
+  gap: 1rem;
+  padding: 3.125rem 1rem 0 1rem;
 }
 
 .user-avatar {
@@ -114,10 +116,33 @@ body {
   gap: 0.5rem;
 }
 
-.user-name {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: #333;
+.homepage__userNameAndBalanceContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.homepage__user-name {
+  font-size: 0.75rem;
+  color: #dddddd;
+}
+
+.homepage__user-balance {
+  font-size: 1.125rem;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.homepage__wallet-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 20px;
+  padding: 0 1rem;
+}
+
+.nav {
+  padding: 0 1rem;
 }
 
 .nav ul {
@@ -129,15 +154,63 @@ body {
 
 .nav-link {
   display: block;
-  padding: 1rem;
+  padding: 1.125rem;
   color: #333;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 10px;
   margin-bottom: 0.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-weight: 700;
+  background-color: transparent;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .nav-link:hover {
   background-color: #e2e2e2;
+  transition: 0.5s;
+}
+
+.active-nav-link {
+  display: block;
+  padding: 1.125rem;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  background-color: rgba(140, 140, 140, 0.15);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.active-nav-link:hover {
+  color: #333;
+  background-color: #e2e2e2;
+  transition: 0.5s;
+}
+
+.fast-deposit-btn {
+  background-color: #8600ef;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.fast-deposit-btn:hover {
+  background-color: #ae28ff;
+  transition: 0.5s;
 }
 
 .wallet-action-btn {
@@ -176,7 +249,28 @@ body {
 
 .buttons-container {
   display: flex;
-  gap: 20px;
+  gap: 1.25rem;
+  overflow-x: auto;
+}
+
+.buttons-container::-webkit-scrollbar {
+  width: 16px;
+  height: 10px;
+}
+
+.buttons-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.buttons-container::-webkit-scrollbar-thumb {
+  background: #464646;
+  border-radius: 10px;
+  border: 2px solid #333;
+}
+
+.buttons-container::-webkit-scrollbar-thumb:hover {
+  background: #606060;
+  border: 2px solid #464646;
 }
 
 /* Grid Layout */
@@ -263,5 +357,11 @@ body {
 .verticalLine__line {
   width: 1px;
   height: 28px;
+  background-color: #373737;
+}
+
+.horizontalLine__line {
+  width: 100%;
+  height: 1px;
   background-color: #373737;
 }

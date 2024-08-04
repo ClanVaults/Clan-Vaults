@@ -1,7 +1,6 @@
 /* General Styles */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
 }
 
 /* Dashboard Layout */
@@ -16,10 +15,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  background-color: #444444;
   color: white;
   padding: 1rem 2rem;
-  height: 142px;
+  height: 64px;
 }
 
 .header-logged-in {
@@ -37,11 +36,11 @@ body {
 .header-logo {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .homepage__loginOptionsContainer {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
@@ -56,7 +55,6 @@ body {
 
 .homepage__connectedInfoContainer {
   display: flex;
-  flex-direction: column;
   gap: 1rem;
   align-items: center;
 }
@@ -108,6 +106,12 @@ body {
 .user-avatar {
   border-radius: 50%;
   border: 2px solid #333;
+}
+
+.homepage__wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .user-name {
@@ -248,4 +252,16 @@ body {
 /* Custom styles for grid items */
 .grid-item-single {
   grid-column: span 3;
+}
+
+.header__title {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.verticalLine__line {
+  width: 1px;
+  height: 28px;
+  background-color: #373737;
 }

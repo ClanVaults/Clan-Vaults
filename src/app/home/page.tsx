@@ -3,15 +3,18 @@
 import Image from "next/image";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import React from "react";
+import VerticalLine from "./VerticalLine";
+import { useRouter } from "next/navigation";
 
 const Home: React.FC = () => {
   const account = useAccount();
   const { connectors, connect /* status, error */ } = useConnect();
   const { disconnect } = useDisconnect();
-  
-  const openGithubTeam = () => {
+  const router = useRouter();
+
+  /* const openGithubTeam = () => {
     window.open("https://github.com/ClanVaults", "_blank");
-  }
+  }; */
 
   // Function to format wallet address
   const formatAddress = (address?: string) => {
@@ -19,23 +22,28 @@ const Home: React.FC = () => {
     return `${address.slice(0, 4)}...${address.slice(-4)}`;
   };
 
+  function goToHome() {
+    router.push("/");
+  }
+
   return (
     <div className="dashboard">
       {/* Header */}
       <header className="header">
         <div className="header-logo">
           <Image
-            onClick={openGithubTeam}
-            src="/team-logo.png"
+            onClick={goToHome}
+            src="/clanvaults-logo.svg"
             alt="Logo"
-            width={70}
-            height={70}
+            width={29}
+            height={26}
             className="team-logo cursor-pointer"
           />
+          <span className="header__title">Clan vaults</span>
         </div>
         <div className="homepage__loginOptionsContainer">
           {account.status === "disconnected" && (
-            <span className="weight-bold">Login</span>
+            <span className="weight-bold">Login with</span>
           )}
           <div className="homepage__loginOptions">
             {account.status === "connected" ? (
@@ -48,15 +56,24 @@ const Home: React.FC = () => {
                     width={40}
                     height={40}
                   />
-                  <div className="wallet-info">
+                  <VerticalLine />
+                  <button className="login-btn" onClick={() => disconnect()}>
+                    Disconnect
+                  </button>
+                  <VerticalLine />
+                  <div className="homepage__wallet-info">
+                    <svg
+                      width="10"
+                      height="10"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="5" cy="5" r="5" fill="#7FFF00" />
+                    </svg>
                     <p className="wallet-address">
                       {formatAddress(account.addresses[0])}
                     </p>
                   </div>
                 </div>
-                <button className="login-btn" onClick={() => disconnect()}>
-                  Disconnect
-                </button>
               </div>
             ) : (
               connectors.map((connector) => {

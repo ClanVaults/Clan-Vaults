@@ -5,64 +5,54 @@ import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 function Home() {
   const account = useAccount();
-  const { connectors, connect, status, error } = useConnect();
+  const { connectors, connect /* status, error */ } = useConnect();
   const { disconnect } = useDisconnect();
+  
+  const openGithubTeam = () => {
+    window.open("https://github.com/ClanVaults", "_blank");
+  }
 
   return (
     <div className="dashboard">
       {/* Header */}
       <header className="header">
         <div className="header-logo">
-          <Image
-            src="icon.svg"
-            alt="Logo"
-            width={100}
-            height={40}
-          />
+          <Image onClick={openGithubTeam} src="/team-logo.png" alt="Logo" width={70} height={70} className="team-logo cursor-pointer"/>
         </div>
-        <div className="header-actions">
-          {account.status === "connected" ? (
-            <button className="login-btn" onClick={() => disconnect()}>
-              Disconnect
-            </button>
-          ) : (
-            connectors
-              .filter(
-                (connector) =>
-                  connector.name === "Injected" ||
-                  connector.name === "WalletConnect",
-              )
-              .map((connector) => (
-                <button
-                  className="login-btn"
-                  key={connector.uid}
-                  onClick={() => connect({ connector })}
-                >
-                  {connector.name}
-                </button>
-              ))
-          )}
-          {connectors.map((connector) => {
-            if (connector.name === "MetaMask") {
-              return (
-                <div
-                  className="login-with-metamask"
-                  key={connector.uid}
-                >
-                  <span>Connect with wallet</span>
-                  <Image
-                    className="metamask-icon"
-                    onClick={() => connect({ connector })}
-                    src="/metamask-login.svg"
-                    alt="MetaMask"
-                    width="40"
-                    height="40"
-                  />
-                </div>
-              );
-            }
-            return null;
-          })}
+        <div className="homepage__loginOptionsContainer">
+          {account.status === "disconnected" && <span className="weight-bold">Login</span>}
+          <div className="homepage__loginOptions">
+            {account.status === "connected" ? (
+              <button className="login-btn" onClick={() => disconnect()}>
+                Disconnect
+              </button>
+            ) : (
+              connectors.map((connector) => {
+                if (
+                  connector.name === "MetaMask" ||
+                  connector.name === "WalletConnect"
+                ) {
+                  return (
+                    <div className="login-with-metamask" key={connector.uid}>
+                      <Image
+                        className="wallet-icon"
+                        onClick={() => connect({ connector })}
+                        src={
+                          connector.name === "MetaMask"
+                            ? "/metamask-login.svg"
+                            : "/wallet-connect.jpg"
+                        }
+                        alt={connector.name}
+                        width="40"
+                        height="40"
+                      />
+                    </div>
+                  );
+                }
+                return null;
+              })
+            )}
+          </div>
         </div>
       </header>
 
@@ -72,12 +62,36 @@ function Home() {
         <aside className="sidebar">
           <nav className="nav">
             <ul>
-              <li><a href="#" className="nav-link">Dashboard</a></li>
-              <li><a href="#" className="nav-link">Profile</a></li>
-              <li><a href="#" className="nav-link">Settings</a></li>
-              <li><a href="#" className="nav-link">Notifications</a></li>
-              <li><a href="#" className="nav-link">Help</a></li>
-              <li><a href="#" className="nav-link">Logout</a></li>
+              <li>
+                <a href="#" className="nav-link">
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Settings
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Notifications
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Help
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Logout
+                </a>
+              </li>
             </ul>
           </nav>
         </aside>

@@ -26,10 +26,19 @@ body {
   align-items: center;
 }
 
-.header-actions {
+.homepage__loginOptionsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.homepage__loginOptions {
   display: flex;
   gap: 1rem;
-  align-items: center;
 }
 
 .login-btn {
@@ -103,23 +112,23 @@ body {
 /* Responsive Styles */
 @media (max-width: 768px) {
   .grid-container {
-      grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 480px) {
   .grid-container {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
 
   .sidebar {
-      width: 100%;
-      border-right: none;
-      border-bottom: 1px solid #ddd;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
   }
 
   .header-logo img {
-      height: 30px;
+    height: 30px;
   }
 }
 
@@ -130,7 +139,7 @@ body {
   cursor: pointer;
 }
 
-.metamask-icon {
+.wallet-icon {
   cursor: pointer;
 }
 

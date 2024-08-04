@@ -2,7 +2,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 html,
@@ -41,4 +41,5 @@ button {
   border-radius: 12px;
 }
 
-@import "./page.module.css";
+@import "./home/style.css";
+@import "./components/VaultCard/style.css";

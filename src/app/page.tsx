@@ -6,8 +6,12 @@ import React from "react";
 
 const Home: React.FC = () => {
   const account = useAccount();
-  const { connectors, connect, status, error } = useConnect();
+  const { connectors, connect /* status, error */ } = useConnect();
   const { disconnect } = useDisconnect();
+  
+  const openGithubTeam = () => {
+    window.open("https://github.com/ClanVaults", "_blank");
+  }
 
   // Function to format wallet address
   const formatAddress = (address?: string) => {
@@ -20,17 +24,13 @@ const Home: React.FC = () => {
       {/* Header */}
       <header className="header">
         <div className="header-logo">
-          <Image
-            src="icon.svg" // Replace with your logo path
-            alt="Logo"
-            width={100}
-            height={40}
-          />
-          Clan Vaults
+          <Image onClick={openGithubTeam} src="/team-logo.png" alt="Logo" width={70} height={70} className="team-logo cursor-pointer"/>
         </div>
-        <div className="header-actions">
-          {account.status === "connected" ? (
-            <div className="header-logged-in">
+        <div className="homepage__loginOptionsContainer">
+          {account.status === "disconnected" && <span className="weight-bold">Login</span>}
+          <div className="homepage__loginOptions">
+            {account.status === "connected" ? (
+              <>
               <button className="login-btn" onClick={() => disconnect()}>
                 Disconnect
               </button>
@@ -46,47 +46,34 @@ const Home: React.FC = () => {
                   <p className="wallet-address">{formatAddress(account.addresses[0])}</p>
                 </div>
               </div>
-            </div>
-          ) : (
-            <>
-              {connectors
-                .filter(
-                  (connector) =>
-                    connector.name === "Injected" ||
-                    connector.name === "WalletConnect",
-                )
-                .map((connector) => (
-                  <button
-                    className="login-btn"
-                    key={connector.uid}
-                    onClick={() => connect({ connector })}
-                  >
-                    {connector.name}
-                  </button>
-                ))}
-              {connectors.map((connector) => {
-                if (connector.name === "MetaMask") {
+              </>
+            ) : (
+              connectors.map((connector) => {
+                if (
+                  connector.name === "MetaMask" ||
+                  connector.name === "WalletConnect"
+                ) {
                   return (
-                    <div
-                      className="login-with-metamask"
-                      key={connector.uid}
-                    >
-                      <span>Connect with wallet</span>
+                    <div className="login-with-metamask" key={connector.uid}>
                       <Image
-                        className="metamask-icon"
+                        className="wallet-icon"
                         onClick={() => connect({ connector })}
-                        src="/metamask-login.svg" // Replace with MetaMask icon path
-                        alt="MetaMask"
-                        width={40}
-                        height={40}
+                        src={
+                          connector.name === "MetaMask"
+                            ? "/metamask-login.svg"
+                            : "/wallet-connect.jpg"
+                        }
+                        alt={connector.name}
+                        width="40"
+                        height="40"
                       />
                     </div>
                   );
                 }
                 return null;
-              })}
-            </>
-          )}
+              })
+            )}
+          </div>
         </div>
       </header>
 
@@ -120,12 +107,36 @@ const Home: React.FC = () => {
           )}
           <nav className="nav">
             <ul>
-              <li><a href="#" className="nav-link">Dashboard</a></li>
-              <li><a href="#" className="nav-link">Profile</a></li>
-              <li><a href="#" className="nav-link">Settings</a></li>
-              <li><a href="#" className="nav-link">Notifications</a></li>
-              <li><a href="#" className="nav-link">Help</a></li>
-              <li><a href="#" className="logout">Logout</a></li>
+              <li>
+                <a href="#" className="nav-link">
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Settings
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Notifications
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Help
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Logout
+                </a>
+              </li>
             </ul>
           </nav>
         </aside>

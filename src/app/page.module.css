@@ -38,10 +38,19 @@ body {
   align-items: center;
 }
 
-.header-actions {
+.homepage__loginOptionsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.homepage__loginOptions {
   display: flex;
   gap: 1rem;
-  align-items: center;
 }
 
 .login-btn {

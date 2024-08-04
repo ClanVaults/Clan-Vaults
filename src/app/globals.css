@@ -31,4 +31,14 @@ button {
   cursor: pointer;
 }
 
+.weight-bold {
+  font-weight: bold;
+}
+
+.team-logo {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
+}
+
 @import "./page.module.css";

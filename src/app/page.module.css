@@ -216,14 +216,36 @@ body {
   .grid-container {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .grid-container > .grid-item:nth-of-type(1) {
-    grid-column: span 2;
-  }
 }
 
 @media (max-width: 480px) {
   .grid-container {
     grid-template-columns: 1fr;
   }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .header-logo img {
+    height: 30px;
+  }
+}
+
+.login-with-metamask {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.wallet-icon {
+  cursor: pointer;
+}
+
+/* Custom styles for grid items */
+.grid-item-single {
+  grid-column: span 3;
 }

@@ -8,10 +8,10 @@ const Home: React.FC = () => {
   const account = useAccount();
   const { connectors, connect /* status, error */ } = useConnect();
   const { disconnect } = useDisconnect();
-
+  
   const openGithubTeam = () => {
     window.open("https://github.com/ClanVaults", "_blank");
-  };
+  }
 
   // Function to format wallet address
   const formatAddress = (address?: string) => {

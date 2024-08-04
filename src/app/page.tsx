@@ -9,62 +9,51 @@ function Home() {
   const { disconnect } = useDisconnect();
 
   return (
-    <>
-      <div>
-        <h2>Account</h2>
-
-        <div>
-          status: {account.status}
-          <br />
-          addresses: {JSON.stringify(account.addresses)}
-          <br />
-          chainId: {account.chainId}
+    <div className="dashboard">
+      {/* Header */}
+      <header className="header">
+        <div className="header-logo">
+          <Image
+            src="/path/to/logo.png" // Replace with your logo path
+            alt="Logo"
+            width={100}
+            height={40}
+          />
         </div>
-
-        {account.status === "connected" && (
-          <button type="button" onClick={() => disconnect()}>
-            Disconnect
-          </button>
-        )}
-      </div>
-
-      <div>
-        <h2>Connect</h2>
-        <div className="homepage__loginMethodsContainer">
-          {connectors
-            .filter(
-              (connector) =>
-                connector.name === "Injected" ||
-                connector.name === "WalletConnect",
-            )
-            .map((connector) => {
-              return (
+        <div className="header-actions">
+          {account.status === "connected" ? (
+            <button className="login-btn" onClick={() => disconnect()}>
+              Disconnect
+            </button>
+          ) : (
+            connectors
+              .filter(
+                (connector) =>
+                  connector.name === "Injected" ||
+                  connector.name === "WalletConnect",
+              )
+              .map((connector) => (
                 <button
-                  className="homepage__defaultButtonToLogin cursor-pointer"
+                  className="login-btn"
                   key={connector.uid}
                   onClick={() => connect({ connector })}
-                  type="button"
                 >
                   {connector.name}
                 </button>
-              );
-            })}
-        </div>
-        <div>
+              ))
+          )}
           {connectors.map((connector) => {
             if (connector.name === "MetaMask") {
               return (
                 <div
-                  className="homepage__loginWithMetamaskContainer"
+                  className="login-with-metamask"
                   key={connector.uid}
                 >
-                  <span className="homepage__generalText">
-                    Connect with wallet
-                  </span>
+                  <span>Connect with wallet</span>
                   <Image
-                    className="cursor-pointer home"
+                    className="metamask-icon"
                     onClick={() => connect({ connector })}
-                    src="/metamask-login.svg"
+                    src="/metamask-login.svg" // Replace with MetaMask icon path
                     alt="MetaMask"
                     width="40"
                     height="40"
@@ -72,12 +61,43 @@ function Home() {
                 </div>
               );
             }
+            return null;
           })}
         </div>
-        <div>{status}</div>
-        <div>{error?.message}</div>
+      </header>
+
+      {/* Main Layout */}
+      <div className="main-layout">
+        {/* Sidebar Menu */}
+        <aside className="sidebar">
+          <nav className="nav">
+            <ul>
+              <li><a href="#" className="nav-link">Dashboard</a></li>
+              <li><a href="#" className="nav-link">Profile</a></li>
+              <li><a href="#" className="nav-link">Settings</a></li>
+              <li><a href="#" className="nav-link">Notifications</a></li>
+              <li><a href="#" className="nav-link">Help</a></li>
+              <li><a href="#" className="nav-link">Logout</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        {/* Main Content */}
+        <main className="content">
+          <div className="grid-container">
+            {/* First Row: 1 container */}
+            <div className="grid-item grid-item-single">Container 1</div>
+            {/* Second Row: 2 containers */}
+            <div className="grid-item">Container 2</div>
+            <div className="grid-item">Container 3</div>
+            {/* Third Row: 3 containers */}
+            <div className="grid-item">Container 4</div>
+            <div className="grid-item">Container 5</div>
+            <div className="grid-item">Container 6</div>
+          </div>
+        </main>
       </div>
-    </>
+    </div>
   );
 }
 

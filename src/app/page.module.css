@@ -1,20 +1,140 @@
-.homepage__principalContainer {
-  display: flex;
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-.homepage__loginWithMetamaskContainer {
+/* Dashboard Layout */
+.dashboard {
   display: flex;
   flex-direction: column;
-  padding: 20px 30px;
-  background-color: grey;
-  width: 500px;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  border-radius: 20px;
+  height: 100vh;
 }
 
-.homepage__generalText {
-  font-size: 16px;
-  font-weight: 400;
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 1rem 2rem;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.login-btn {
+  background-color: #ffffff;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #e2e2e2;
+}
+
+/* Main Layout */
+.main-layout {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-right: 1px solid #ddd;
+}
+
+.nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  display: block;
+  padding: 1rem;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.nav-link:hover {
+  background-color: #e2e2e2;
+}
+
+/* Main Content */
+.content {
+  flex: 1;
+  padding: 1rem;
+}
+
+/* Grid Layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.grid-item {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  height: 200px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-container {
+      grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid #ddd;
+  }
+
+  .header-logo img {
+      height: 30px;
+  }
+}
+
+.login-with-metamask {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.metamask-icon {
+  cursor: pointer;
+}
+
+/* Custom styles for grid items */
+.grid-item-single {
+  grid-column: span 3;
 }

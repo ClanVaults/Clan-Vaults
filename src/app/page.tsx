@@ -9,41 +9,49 @@ function Home() {
   const { disconnect } = useDisconnect();
 
   return (
-    <>
-      <div>
-        <h2>Account</h2>
-
-        <div>
-          status: {account.status}
-          <br />
-          addresses: {JSON.stringify(account.addresses)}
-          <br />
-          chainId: {account.chainId}
+    <div className="dashboard">
+      {/* Header */}
+      <header className="header">
+        <div className="header-logo">
+          <Image
+            src="icon.svg"
+            alt="Logo"
+            width={100}
+            height={40}
+          />
         </div>
-
-        {account.status === "connected" && (
-          <button type="button" onClick={() => disconnect()}>
-            Disconnect
-          </button>
-        )}
-      </div>
-
-      <div>
-        <h2>Connect</h2>
-        {connectors
-          .filter(
-            (connector) =>
-              connector.name === "MetaMask" || connector.name === "Injected",
-          )
-          .map((connector) => {
+        <div className="header-actions">
+          {account.status === "connected" ? (
+            <button className="login-btn" onClick={() => disconnect()}>
+              Disconnect
+            </button>
+          ) : (
+            connectors
+              .filter(
+                (connector) =>
+                  connector.name === "Injected" ||
+                  connector.name === "WalletConnect",
+              )
+              .map((connector) => (
+                <button
+                  className="login-btn"
+                  key={connector.uid}
+                  onClick={() => connect({ connector })}
+                >
+                  {connector.name}
+                </button>
+              ))
+          )}
+          {connectors.map((connector) => {
             if (connector.name === "MetaMask") {
               return (
-                <div className="homepage__loginWithMetamaskContainer">
-                  <span className="homepage__generalText">
-                    Connect with wallet
-                  </span>
+                <div
+                  className="login-with-metamask"
+                  key={connector.uid}
+                >
+                  <span>Connect with wallet</span>
                   <Image
-                    className="cursor-pointer home"
+                    className="metamask-icon"
                     onClick={() => connect({ connector })}
                     src="/metamask-login.svg"
                     alt="MetaMask"
@@ -53,20 +61,40 @@ function Home() {
                 </div>
               );
             }
-            return (
-              <button
-                key={connector.uid}
-                onClick={() => connect({ connector })}
-                type="button"
-              >
-                {connector.name}
-              </button>
-            );
+            return null;
           })}
-        <div>{status}</div>
-        <div>{error?.message}</div>
+        </div>
+      </header>
+
+      {/* Main Layout */}
+      <div className="main-layout">
+        {/* Sidebar Menu */}
+        <aside className="sidebar">
+          <nav className="nav">
+            <ul>
+              <li><a href="#" className="nav-link">Dashboard</a></li>
+              <li><a href="#" className="nav-link">Profile</a></li>
+              <li><a href="#" className="nav-link">Settings</a></li>
+              <li><a href="#" className="nav-link">Notifications</a></li>
+              <li><a href="#" className="nav-link">Help</a></li>
+              <li><a href="#" className="nav-link">Logout</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        {/* Main Content */}
+        <main className="content">
+          <div className="grid-container">
+            <div className="grid-item grid-item-single">Container 1</div>
+            <div className="grid-item">Container 2</div>
+            <div className="grid-item">Container 3</div>
+            <div className="grid-item">Container 4</div>
+            <div className="grid-item">Container 5</div>
+            <div className="grid-item">Container 6</div>
+          </div>
+        </main>
       </div>
-    </>
+    </div>
   );
 }
 

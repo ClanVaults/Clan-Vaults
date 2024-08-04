@@ -14,7 +14,7 @@ function Home() {
       <header className="header">
         <div className="header-logo">
           <Image
-            src="/path/to/logo.png" // Replace with your logo path
+            src="icon.svg"
             alt="Logo"
             width={100}
             height={40}
@@ -53,7 +53,7 @@ function Home() {
                   <Image
                     className="metamask-icon"
                     onClick={() => connect({ connector })}
-                    src="/metamask-login.svg" // Replace with MetaMask icon path
+                    src="/metamask-login.svg"
                     alt="MetaMask"
                     width="40"
                     height="40"
@@ -85,12 +85,9 @@ function Home() {
         {/* Main Content */}
         <main className="content">
           <div className="grid-container">
-            {/* First Row: 1 container */}
             <div className="grid-item grid-item-single">Container 1</div>
-            {/* Second Row: 2 containers */}
             <div className="grid-item">Container 2</div>
             <div className="grid-item">Container 3</div>
-            {/* Third Row: 3 containers */}
             <div className="grid-item">Container 4</div>
             <div className="grid-item">Container 5</div>
             <div className="grid-item">Container 6</div>

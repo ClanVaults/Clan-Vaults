@@ -97,7 +97,7 @@ body {
   border-radius: 8px;
   padding: 1rem;
   text-align: center;
-  height: 200px; /* Adjust height as needed */
+  height: 200px;
 }
 
 /* Responsive Styles */
@@ -119,7 +119,7 @@ body {
   }
 
   .header-logo img {
-      height: 30px; /* Adjust height for smaller screens */
+      height: 30px;
   }
 }
 

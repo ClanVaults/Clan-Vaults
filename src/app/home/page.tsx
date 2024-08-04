@@ -7,6 +7,10 @@ import VerticalLine from "./VerticalLine";
 import { usePathname, useRouter } from "next/navigation";
 import HorizontalLine from "./HorizontalLine";
 import SidebarCircle from "./SidebarCircle";
+import ERC20Balance from "./ERC20Balance";
+import Title from "./Title";
+import Subtitle from "./Subtitle";
+import FakeVaultCards from "../components/FakeVaultCards";
 
 const Home: React.FC = () => {
   const account = useAccount();
@@ -234,29 +238,51 @@ const Home: React.FC = () => {
 
         {/* Main Content */}
         <main className="content">
-          <div className="welcome-back">
+          <div>
             {account.status === "connected" && (
-              <div className="welcome-back">
-                <h2>Welcome Back, {formatAddress(account.addresses[0])}</h2>
-                <div className="buttons-container">
+              <>
+                <div className="welcome-back">
+                  <h2 className="homepage__welcomeMessage">
+                    Welcome Back, {formatAddress(account.addresses[0])}
+                  </h2>
                   <div className="buttons-container">
-                    <button className="wallet-action-btn">Send</button>
-                    <button className="wallet-action-btn">Withdraw</button>
-                    <button className="wallet-action-btn">Scan</button>
+                    <button className="fast-deposit-huge-btn">
+                      Fast Deposit
+                    </button>
                   </div>
-                  <button className="wallet-action-btn">Fast Deposit</button>
                 </div>
-              </div>
+                <div className="homepage__section">
+                  <div className="homepage__titleContainer">
+                    <Title>My Assets</Title>
+                  </div>
+                  <div className="homepage__balances">
+                    <ERC20Balance />
+                    <ERC20Balance />
+                    <ERC20Balance />
+                    <ERC20Balance />
+                    <ERC20Balance />
+                    <ERC20Balance />
+                  </div>
+                </div>
+                <div className="homepage__section">
+                  <div className="homepage__titleContainer">
+                    <Title>My Vaults</Title>
+                  </div>
+                  <FakeVaultCards />
+                </div>
+                <div className="homepage__section">
+                  <div className="homepage__titleContainer">
+                    <Title>Notifications</Title>
+                  </div>
+                  <div className="grid-item grid-item-single">
+                    <Subtitle>Nothing to show</Subtitle>
+                  </div>
+                </div>
+              </>
             )}
-          </div>
-          <div className="grid-item grid-item-single">Container 1</div>
-          <div className="grid-container">
-            <div className="grid-item">Container 2</div>
-            <div className="grid-item">Container 2</div>
-            <div className="grid-item">Container 3</div>
-            <div className="grid-item">Container 4</div>
-            <div className="grid-item">Container 5</div>
-            <div className="grid-item">Container 6</div>
+            {account.status === "disconnected" && (
+              <Title>You are not logged in</Title>
+            )}
           </div>
         </main>
       </div>

@@ -42,3 +42,4 @@ button {
 }
 
 @import "./home/style.css";
+@import "./components/VaultCard/style.css";

@@ -19,6 +19,7 @@ body {
   background-color: #333;
   color: white;
   padding: 1rem 2rem;
+  height: 142px;
 }
 
 .header-logged-in {
@@ -38,10 +39,33 @@ body {
   align-items: center;
 }
 
-.header-actions {
+.homepage__loginOptionsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.homepage__loginOptions {
   display: flex;
   gap: 1rem;
+}
+
+.homepage__connectedInfoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   align-items: center;
+}
+
+.homepage__user-info {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-btn {
@@ -51,6 +75,7 @@ body {
   border-radius: 4px;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  height: fit-content;
 }
 
 .login-btn:hover {
@@ -110,7 +135,6 @@ body {
 .nav-link:hover {
   background-color: #e2e2e2;
 }
-
 
 .wallet-action-btn {
   background-color: #ffffff;
@@ -187,20 +211,41 @@ body {
   background-color: #e2e2e2;
 }
 
-
 /* Responsive Styles */
 @media (max-width: 768px) {
   .grid-container {
-      grid-template-columns: repeat(2, 1fr); /* Two columns on smaller screens */
-  }
-
-  .grid-container > .grid-item:nth-of-type(1) {
-      grid-column: span 2; /* First item spans two columns on smaller screens */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 480px) {
   .grid-container {
-      grid-template-columns: 1fr; /* Single column on very small screens */
+    grid-template-columns: 1fr;
   }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .header-logo img {
+    height: 30px;
+  }
+}
+
+.login-with-metamask {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.wallet-icon {
+  cursor: pointer;
+}
+
+/* Custom styles for grid items */
+.grid-item-single {
+  grid-column: span 3;
 }

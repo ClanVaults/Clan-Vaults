@@ -6,8 +6,12 @@ import React from "react";
 
 const Home: React.FC = () => {
   const account = useAccount();
-  const { connectors, connect, status, error } = useConnect();
+  const { connectors, connect /* status, error */ } = useConnect();
   const { disconnect } = useDisconnect();
+  
+  const openGithubTeam = () => {
+    window.open("https://github.com/ClanVaults", "_blank");
+  }
 
   // Function to format wallet address
   const formatAddress = (address?: string) => {
@@ -21,90 +25,84 @@ const Home: React.FC = () => {
       <header className="header">
         <div className="header-logo">
           <Image
-            src="icon.svg" // Replace with your logo path
+            onClick={openGithubTeam}
+            src="/team-logo.png"
             alt="Logo"
-            width={100}
-            height={40}
+            width={70}
+            height={70}
+            className="team-logo cursor-pointer"
           />
-          Clan Vaults
         </div>
-        <div className="header-actions">
-          {account.status === "connected" ? (
-            <div className="header-logged-in">
-              <button className="login-btn" onClick={() => disconnect()}>
-                Disconnect
-              </button>
-              <div className="user-info">
-                <Image
-                  className="user-avatar"
-                  src="/path/to/user-avatar.jpg" // Replace with user's avatar path
-                  alt="User Avatar"
-                  width={40}
-                  height={40}
-                />
-                <div className="wallet-info">
-                  <p className="wallet-address">{formatAddress(account.addresses[0])}</p>
+        <div className="homepage__loginOptionsContainer">
+          {account.status === "disconnected" && (
+            <span className="weight-bold">Login</span>
+          )}
+          <div className="homepage__loginOptions">
+            {account.status === "connected" ? (
+              <div className="homepage__connectedInfoContainer">
+                <div className="homepage__user-info">
+                  <Image
+                    className="user-avatar"
+                    src="/empty-profile-icon.svg"
+                    alt="User Avatar"
+                    width={40}
+                    height={40}
+                  />
+                  <div className="wallet-info">
+                    <p className="wallet-address">
+                      {formatAddress(account.addresses[0])}
+                    </p>
+                  </div>
                 </div>
+                <button className="login-btn" onClick={() => disconnect()}>
+                  Disconnect
+                </button>
               </div>
-            </div>
-          ) : (
-            <>
-              {connectors
-                .filter(
-                  (connector) =>
-                    connector.name === "Injected" ||
-                    connector.name === "WalletConnect",
-                )
-                .map((connector) => (
-                  <button
-                    className="login-btn"
-                    key={connector.uid}
-                    onClick={() => connect({ connector })}
-                  >
-                    {connector.name}
-                  </button>
-                ))}
-              {connectors.map((connector) => {
-                if (connector.name === "MetaMask") {
+            ) : (
+              connectors.map((connector) => {
+                if (
+                  connector.name === "MetaMask" ||
+                  connector.name === "WalletConnect"
+                ) {
                   return (
-                    <div
-                      className="login-with-metamask"
-                      key={connector.uid}
-                    >
-                      <span>Connect with wallet</span>
+                    <div className="login-with-metamask" key={connector.uid}>
                       <Image
-                        className="metamask-icon"
+                        className="wallet-icon"
                         onClick={() => connect({ connector })}
-                        src="/metamask-login.svg" // Replace with MetaMask icon path
-                        alt="MetaMask"
-                        width={40}
-                        height={40}
+                        src={
+                          connector.name === "MetaMask"
+                            ? "/metamask-login.svg"
+                            : "/wallet-connect.jpg"
+                        }
+                        alt={connector.name}
+                        width="40"
+                        height="40"
                       />
                     </div>
                   );
                 }
                 return null;
-              })}
-            </>
-          )}
+              })
+            )}
+          </div>
         </div>
       </header>
 
-      {/* Main Layout */}
       <div className="main-layout">
-        {/* Sidebar Menu */}
         <aside className="sidebar">
           <div className="user-profile">
             {account.status === "connected" && (
               <>
                 <Image
                   className="user-avatar"
-                  src="/path/to/user-avatar.jpg" // Replace with user's avatar path
+                  src="/empty-profile-icon.svg"
                   alt="User Avatar"
                   width={50}
                   height={50}
                 />
-                <p className="user-name">{formatAddress(account.addresses[0])}</p>
+                <p className="user-name">
+                  {formatAddress(account.addresses[0])}
+                </p>
               </>
             )}
           </div>
@@ -120,12 +118,36 @@ const Home: React.FC = () => {
           )}
           <nav className="nav">
             <ul>
-              <li><a href="#" className="nav-link">Dashboard</a></li>
-              <li><a href="#" className="nav-link">Profile</a></li>
-              <li><a href="#" className="nav-link">Settings</a></li>
-              <li><a href="#" className="nav-link">Notifications</a></li>
-              <li><a href="#" className="nav-link">Help</a></li>
-              <li><a href="#" className="logout">Logout</a></li>
+              <li>
+                <a href="#" className="nav-link">
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Settings
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Notifications
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Help
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link">
+                  Logout
+                </a>
+              </li>
             </ul>
           </nav>
         </aside>
@@ -137,19 +159,19 @@ const Home: React.FC = () => {
               <div className="welcome-back">
                 <h2>Welcome Back, {formatAddress(account.addresses[0])}</h2>
                 <div className="buttons-container">
-                <div className="buttons-container">
-                  <button className="wallet-action-btn">Send</button>
-                  <button className="wallet-action-btn">Withdraw</button>
-                  <button className="wallet-action-btn">Scan</button>
-                </div>
-                <button className="wallet-action-btn">Fast Deposit</button>
+                  <div className="buttons-container">
+                    <button className="wallet-action-btn">Send</button>
+                    <button className="wallet-action-btn">Withdraw</button>
+                    <button className="wallet-action-btn">Scan</button>
+                  </div>
+                  <button className="wallet-action-btn">Fast Deposit</button>
                 </div>
               </div>
             )}
           </div>
           <div className="grid-item grid-item-single">Container 1</div>
           <div className="grid-container">
-            <div className="grid-item">Container 2</div> 
+            <div className="grid-item">Container 2</div>
             <div className="grid-item">Container 2</div>
             <div className="grid-item">Container 3</div>
             <div className="grid-item">Container 4</div>
@@ -160,6 +182,6 @@ const Home: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Home;
